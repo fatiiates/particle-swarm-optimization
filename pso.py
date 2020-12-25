@@ -33,11 +33,26 @@ def createPlot(OBJECTIVE_ARRAY, LOCATION_ARRAY):
 def particleSwarmOptimization(functionToOptimize = None, 
                               lowerBoundary = [-1, -1], 
                               upperBoundary = [1, 1], 
-                              particleSize=200, 
+                              particleSize=100, 
                               c1=0.5, 
                               c2=0.5, 
                               numberOfIterations=50):
     
+    if lowerBoundary[0] >= upperBoundary[0]:
+        raise Exception(
+            "X'in alt aralığı, X'in üst aralığından daima küçük olmalıdır.")
+    elif lowerBoundary[1] >= upperBoundary[1]:
+        raise Exception(
+            "Y'in alt aralığı, Y'nin üst aralığından daima küçük olmalıdır.")
+    elif particleSize < 10:
+        raise Exception("Parçacık sayısı 10'dan daha az olamaz.")
+    elif c1 < .2 or c1 > 2:
+        raise Exception("C1 değeri 0.2 ve 2 aralığında bir değer almalıdır.")
+    elif c2 < .2 or c1 > 2:
+        raise Exception("C2 değeri 0.2 ve 2 aralığında bir değer almalıdır.")
+    elif numberOfIterations < 10:
+        raise Exception("İterasyon sayısı 10'dan daha az olamaz.")
+
     # ---------- SABİT DEĞİŞKEN TANIMLAMALARI
 
     FUNCTION_TO_OPTIMIZE = functionToOptimize # Optimize edilecek fonksiyon
@@ -209,7 +224,12 @@ LEVI_UPPER_BOUNDARY = [10, 10]
 # MAIN fonksiyonu
 def main():
     # Parçacık sürüsü optimizasyonu metodumuz çalıştırılıyor
-    particleSwarmOptimization(LEVI, LEVI_LOWER_BOUNDARY, LEVI_UPPER_BOUNDARY)
+    try:
+        particleSwarmOptimization(LEVI, 
+                                  LEVI_LOWER_BOUNDARY, 
+                                  LEVI_UPPER_BOUNDARY)
+    except Exception as e:
+        print(e)
 
 if __name__ == "__main__":
     main()
