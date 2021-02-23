@@ -1,25 +1,94 @@
-# Parçacık Sürü Optimizasyonu
+- [EN description](#en)  
+- [TR açıklama](#tr)
 
-  Temelinde popülasyon olan meta-sezgisel bir algoritmadır. Kuş ve balık sürülerinin hareketlerinden esinlenerek 1995’te Kennedy ve Eberhart tarafından geliştirilmiştir. Her bir aday çözüm parçacıkla (particle), popülasyon ise sürü ile ifade edilir. Her bir aday çözüm (particle) bir sonraki pozisyonunu, hız (velocity) vektörü, kendi en iyi lokasyonu (yerel en iyi) ve sürünün en iyi lokasyonuna (küresel en iyi) göre ayarlar. Bununla birlikte her sürü üyesinin arama uzayındaki hareketini belirleyen ve şartlara göre değişebilen bir hızı mevcuttur.
+# Particle Swarm Optimization(Parçacık Sürü Optimizasyonu, PSO)
+
+# [TR]
+
+## Parçacık Sürü Optimizasyonu Nedir ?
+
+&emsp;&emsp;Temelinde popülasyon olan meta-sezgisel bir algoritmadır. Kuş ve balık sürülerinin hareketlerinden esinlenerek 1995’te Kennedy ve Eberhart tarafından geliştirilmiştir. Her bir aday çözüm parçacıkla (particle), popülasyon ise sürü ile ifade edilir. Her bir aday çözüm (particle) bir sonraki pozisyonunu, hız (velocity) vektörü, kendi en iyi lokasyonu (yerel en iyi) ve sürünün en iyi lokasyonuna (küresel en iyi) göre ayarlar. Bununla birlikte her sürü üyesinin arama uzayındaki hareketini belirleyen ve şartlara göre değişebilen bir hızı mevcuttur. PSO, çok nadir olarak yerel optimum noktalara takılır. Yeterli sayıda parçacık üretildiğinde ihtimal çok düşüktür.
   
-## Algoritmada Bulunan Sabitler
+## Parçacık Sürü Optimizasyonu Nasıl Çalışır ? 
 
-- X = SxD boyutlu, parçacıkların lokasyonlarını tutan bir matris
-- V = SxD boyutlu, parçacıkların hızlarını tutan bir matris
-- pBest = SxD boyutlu, parçacıkların yerel en iyi konumunu tutan bir matris
-- gBest = 1xD boyutlu, pBestler arasındaki en iyi lokasyonun tutulduğu bir dizi
-- w = Atalet momenti
-- c1,c2 = Sabit katsayılar [0.2 ve 2.0] aralığında belirlenir
-- r1,r2 = Rassal olarak bulunan sayılar [0.0, 1.0) aralığındadır
+&emsp;&emsp;PSO, başlangıçta bir sürü belirler. Bu sürüye rastgele lokal değerler atar, lokasyonlar atar ve tüm sürü içinde bir global değer ve global lokasyon belirler. Daha sonra istenen sayı kadar iterasyona başlanır. Her iterasyonda her kuş için yeni lokasyonlar ve yeni objektif değerler hesaplanır. Hesaplanan değerler parçacığın eski değerlerinden daha iyiyse yeni değerler parçacığın yerel değişkenleri olarak değiştirirler. Aynı zamanda bu yeni değerler tüm sürünün global değerlerinden de iyiyse global değerlere de yeni değerler atanır. İterasyonlar sonlandığında global lokasyon ve global objektif değer bizim global minimum noktalarımızdır.
 
-## Algoritma İşlem Adımları
+Algoritma Sözde Kodu
 
-- Rastgele olarak parçacıkların arama uzayındaki başlangıç konumları (xi) ve hızları
-(vi), belirlenen sınırlar arasında atanır.
-- Başlangıçta parçacıkların uygunluk değerleri ve yerel en iyi konumları ile tüm sürünün en iyi
-konumu belirlenir.
-- Her parçacığın uygunluk değeri, kendi yerel en iyi konumundan daha iyi ise parçacığın konumu ve parçacığın uygunluk değeri, yerel en iyi konumu ve yerel uygunluk değeri olarak güncellenir.
-- Yerel en iyi lokasyonun en iyi uygunluk değeri, küresel en iyi lokasyonun uygunluk değeri daha iyi ise o parçacığın konumu ve parçacığın uygunluk değeri, küresel en iyi lokasyon ve küresel uygunluk değeri olarak güncellenir.
-- Parçacıkların hız ve konumları güncellenir.
-- Süreç, iterasyon sayısı tamamlanıncaya kadar üçüncü adımdan itibaren tekrarlanır.
-- Evrim sonunda elde edilen global en iyi konum, problemin çözümüdür.
+- Adım 1: Rastgele olarak parçacıkların arama uzayındaki başlangıç konumları (xi) ve hızları (vi), belirlenen sınırlar arasında atanır.
+- Adım 2: Başlangıçta parçacıkların uygunluk değerleri ve yerel en iyi konumları ile tüm sürünün en iyi konumu belirlenir.
+- Adım 3: İterasyona başlanır ve her parçacık için yeni lokasyon ve buna bağlı olarak uygunluk değeri üretilir, yeni uygunluk değeri parçacığın kendi yerel uygunluk değerinden daha iyi ise yerel en iyi konumu ve yerel uygunluk değeri üretilmiş olan yeni değerlerle güncellenir.
+- Adım 4: Parçacığın yeni yerel uygunluk değeri, küresel en iyi uygunluk değerinden daha iyi ise o parçacığın konumu ve parçacığın uygunluk değeri, küresel en iyi lokasyon ve küresel uygunluk değeri olarak da güncellenir.
+- Adım 5: Parçacıkların hız ve konumları güncellenir.
+- Adım 6: Süreç, iterasyon sayısı tamamlanıncaya kadar üçüncü adımdan itibaren tekrarlanır.
+- Adım 7: Evrim sonunda elde edilen global en iyi konum, problemin çözümüdür.
+
+
+### Sonuçlar
+
+&emsp;&emsp;PSO algoritması metafor bazlı dört farklı fonksiyon üzerinde test edilmiş ve sonuçları aşağıdaki gibidir. Tüm testlerde 'particleSwarmOptimization' fonksiyonu için aşağıdaki parametreler kullanılmıştır.
+
+- functionToOptimize = [İLGİLİ_FONKSİYON]
+- lowerBoundary = [İLGİLİ_FONKSİYON_ALT_SINIRLAR(X,Y)]
+- upperBoundary = [İLGİLİ_FONKSİYON_ÜST_SINIRLAR(X,Y)]
+- particleSize=100
+- c1=0.5
+- c2=0.5
+- numberOfIterations=50
+
+ #### Ackley Fonksiyonu
+ 
+- Fonksiyon: ![\Large x=f(x,%20y)={-20exp[-0.2\sqrt{0.5(x^2%20+%20y^2)}]-exp[0.5(cos2{\pi}x%20+%20cos2{\pi}y)]%20+%20e%20+%20{20}}](https://latex.codecogs.com/svg.latex?\Large&space;f(x,%20y)={-20exp[-0.2\sqrt{0.5(x^2%20+%20y^2)}]-exp[0.5(cos2{\pi}x%20+%20cos2{\pi}y)]%20+%20e%20+%20{20}}) 
+- Global minimum: ![\Large x=f(0,%200)={0}](https://latex.codecogs.com/svg.latex?\Large&space;f(0,%200)={0})
+- Değer aralığı: ![\Large x=-5%20\leq%20x,y%20\leq%205](https://latex.codecogs.com/svg.latex?\Large&space;-5%20\leq%20x,y%20\leq%205)
+
+Elde edilen değerler
+
+- En iyi çözüm için x ve y: [5.204778213273946e-08, 2.2603977383842164e-07]
+- En iyi x ve y için sonuç: 6.560682024314701e-07
+- 50 iterasyon sonucunda elde edilen grafikler;
+
+![pso_ackley](https://user-images.githubusercontent.com/51250249/108910026-56b5d200-7636-11eb-8211-89699a607a0c.png)
+
+ #### Beale Fonksiyonu
+
+- Fonksiyon: ![\Large x=f(x,%20y)={(1.5%20-%20x%20+%20xy)^2%20+%20(2.25%20-%20x%20+%20xy^2)^2%20+%20(2.625%20-%20x%20+%20xy^3)^2}](https://latex.codecogs.com/svg.latex?\Large&space;f(x,%20y)={(1.5%20-%20x%20+%20xy)^2%20+%20(2.25%20-%20x%20+%20xy^2)^2%20+%20(2.625%20-%20x%20+%20xy^3)^2}) 
+- Global minimum: ![\Large x=f(3,%200.5)={0}](https://latex.codecogs.com/svg.latex?\Large&space;f(3,%20{0.5})={0})
+- Değer aralığı: ![\Large x=-4.5%20\leq%20x,y%20\leq%204.5](https://latex.codecogs.com/svg.latex?\Large&space;-4.5%20\leq%20x,y%20\leq%204.5)
+
+Elde edilen değerler
+
+- En iyi çözüm için x ve y: [2.9999945858667654, 0.4999983690893992]
+- En iyi x ve y için sonuç: 6.609783593788841e-12
+- 50 iterasyon sonucunda elde edilen grafikler;
+
+![PSO_BEALE](https://user-images.githubusercontent.com/51250249/108909942-4140a800-7636-11eb-86c7-3d44e73895dd.png)
+
+ #### Goldstein-Price Fonksiyonu
+
+- Fonksiyon: ![\Large x=f(x,%20y)={[1%20+%20(x%20+%20y%20+%201)^2(19%20-%2014x%20+%203x^2%20-%2014y%20+%206xy%20+%203y^2)][30%20+%20(2x%20-%203y)^2(18%20-%2032x%20+%2012x^2%20+%2048y%20-%2036xy%20+%2027y^2)]}](https://latex.codecogs.com/svg.latex?\Large&space;f(x,%20y)={[1%20+%20(x%20+%20y%20+%201)^2(19%20-%2014x%20+%203x^2%20-%2014y%20+%206xy%20+%203y^2)][30%20+%20(2x%20-%203y)^2(18%20-%2032x%20+%2012x^2%20+%2048y%20-%2036xy%20+%2027y^2)]}) 
+- Global minimum: ![\Large x=f(0,%20-1)={3}](https://latex.codecogs.com/svg.latex?\Large&space;f(0,%20-1)={3})
+- Değer aralığı: ![\Large x=-2%20\leq%20x,y%20\leq%202](https://latex.codecogs.com/svg.latex?\Large&space;-2%20\leq%20x,y%20\leq%202)
+
+Elde edilen değerler
+
+- En iyi çözüm için x ve y: [4.9403912363405115e-08, -0.9999999957834693]
+- En iyi x ve y için sonuç: 3.0000000000005698
+- 50 iterasyon sonucunda elde edilen grafikler;
+
+![pso_gsp](https://user-images.githubusercontent.com/51250249/108909945-41d93e80-7636-11eb-83b4-e13a5e824014.png)
+
+
+ #### Lévi Fonksiyonu
+
+- Fonksiyon: ![\Large x=f(x,%20y)={sin^23{\pi}x%20+%20(x%20-%201)^2(1%20+%20sin^23{\pi}y)%20+%20(y%20-%201)^2(1%20+%20sin^22{\pi}y)}](https://latex.codecogs.com/svg.latex?\Large&space;f(x,%20y)={sin^23{\pi}x%20+%20(x%20-%201)^2(1%20+%20sin^23{\pi}y)%20+%20(y%20-%201)^2(1%20+%20sin^22{\pi}y)}) 
+- Global minimum: ![\Large x=f(1,%201)={0}](https://latex.codecogs.com/svg.latex?\Large&space;f(1,%201)={0})
+- Değer aralığı: ![\Large x=-10%20\leq%20x,y%20\leq%2010](https://latex.codecogs.com/svg.latex?\Large&space;-10%20\leq%20x,y%20\leq%2010)
+
+Elde edilen değerler
+
+- En iyi çözüm için x ve y: [1.0000000551840271, 0.9999999103089193]
+- En iyi x ve y için sonuç: 2.815908666126024e-13
+- 50 iterasyon sonucunda elde edilen grafikler;
+
+![pso_levi](https://user-images.githubusercontent.com/51250249/108909946-4271d500-7636-11eb-9c91-a92f9963b013.png)
