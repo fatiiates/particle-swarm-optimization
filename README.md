@@ -11,7 +11,17 @@
 
 ## How PSO works ? 
 
-&emsp;&emsp;PSO initially creates a flock. Assigns random local values ​​to this flock, assigns locations, and determines a global value and global location within the entire flock. Then it starts to iterate for the desired number. New locations and new objective values ​​are calculated for each bird at each iteration. If the calculated values ​​are better than the old values ​​of the particle, they replace the local variables of the particle with the new values. At the same time, if these new values ​​are better than the global values ​​of the whole flock, new values ​​are assigned to global values. When the iterations are over, the global location and global objective value are our global minimum points.
+&emsp;&emsp;PSO initially creates a flock. Assigns random local values ​​to this flock, assigns locations, and determines a global value and global location within the entire flock. Then it starts to iterate for the desired number. New locations and new fitness values ​​are calculated for each particle at each iteration. If the calculated values ​​are better than the old values ​​of the particle, they replace the local variables of the particle with the new values. At the same time, if these new values ​​are better than the global values ​​of the whole flock, new values ​​are assigned to global values. When the iterations are over, the global location and global fitness value are our global minimum points.
+
+Pseudo Code of Algorithm
+
+- Step 1: Randomly assign the starting positions (xi) and their velocities (vi) in the search space of the particles between specified limits.
+- Step 2: At the beginning, the best location of the whole flock is determined with the fitness values ​​and local best positions of the particles.
+- Step 3: Iteration is initiated and a new location and the corresponding fitness value are generated for each particle, If the new fitness value is better than the particle's local fitness value, the local best location and the local fitness value are updated with the new values ​​generated.
+- Step 4: If the new local fitness value of the particle is better than the global best fit value, the location of that particle and the fit value of the particle are updated as the global best location and global fit value.
+- Step 5: The velocities and positions of the particles are updated.
+- Step 6: The process is repeated from the third step until the number of iterations is completed.
+- Step 7: Global best position achieved at the end of evolution is the solution to the function.
 
 # [TR]
 
@@ -21,7 +31,7 @@
   
 ## Parçacık Sürü Optimizasyonu Nasıl Çalışır ? 
 
-&emsp;&emsp;PSO, başlangıçta bir sürü belirler. Bu sürüye rastgele lokal değerler atar, lokasyonlar atar ve tüm sürü içinde bir global değer ve global lokasyon belirler. Daha sonra istenen sayı kadar iterasyona başlanır. Her iterasyonda her kuş için yeni lokasyonlar ve yeni objektif değerler hesaplanır. Hesaplanan değerler parçacığın eski değerlerinden daha iyiyse yeni değerler parçacığın yerel değişkenleri olarak değiştirirler. Aynı zamanda bu yeni değerler tüm sürünün global değerlerinden de iyiyse global değerlere de yeni değerler atanır. İterasyonlar sonlandığında global lokasyon ve global objektif değer bizim global minimum noktalarımızdır.
+&emsp;&emsp;PSO, başlangıçta bir sürü belirler. Bu sürüye rastgele lokal değerler atar, lokasyonlar atar ve tüm sürü içinde bir global değer ve global lokasyon belirler. Daha sonra istenen sayı kadar iterasyona başlanır. Her iterasyonda her parçacık için yeni lokasyonlar ve yeni objektif değerler hesaplanır. Hesaplanan değerler parçacığın eski değerlerinden daha iyiyse yeni değerler parçacığın yerel değişkenleri olarak değiştirirler. Aynı zamanda bu yeni değerler tüm sürünün global değerlerinden de iyiyse global değerlere de yeni değerler atanır. İterasyonlar sonlandığında global lokasyon ve global objektif değer bizim global minimum noktalarımızdır.
 
 Algoritma Sözde Kodu
 
