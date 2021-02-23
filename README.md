@@ -3,6 +3,16 @@
 
 # Particle Swarm Optimization(Parçacık Sürü Optimizasyonu, PSO)
 
+# [EN]
+
+## What is the Particle Swarm Optimization ?
+
+&emsp;&emsp;This is a meta-heuristic algorithm based on population. Developed by Kennedy and Eberhart in 1995, inspired by the movements of flocks of birds and fish. Each candidate solution is expressed as a particle, and the population is expressed as a flock. Each candidate solution (particle) adjusts its next position according to the velocity vector, its best location (local best) and the best location of the flock (global best). And each swarm member has a speed that determines its movement in the search space and can vary according to conditions. PSO rarely deviates to local optimum points. When a sufficient number of particles are produced the probability is very low.
+
+## How PSO works ? 
+
+&emsp;&emsp;PSO initially creates a flock. Assigns random local values ​​to this flock, assigns locations, and determines a global value and global location within the entire flock. Then it starts to iterate for the desired number. New locations and new objective values ​​are calculated for each bird at each iteration. If the calculated values ​​are better than the old values ​​of the particle, they replace the local variables of the particle with the new values. At the same time, if these new values ​​are better than the global values ​​of the whole flock, new values ​​are assigned to global values. When the iterations are over, the global location and global objective value are our global minimum points.
+
 # [TR]
 
 ## Parçacık Sürü Optimizasyonu Nedir ?
