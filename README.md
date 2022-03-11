@@ -1,5 +1,6 @@
 - [EN description](#en)  
 - [TR açıklama](#tr)
+- [Paper(Bildiri)](https://www.fatiiates.com/doc/notice_optimization.pdf)
 
 # Particle Swarm Optimization(Parçacık Sürü Optimizasyonu, PSO)
 
